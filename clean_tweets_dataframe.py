@@ -24,7 +24,7 @@ class Clean_Tweets:
         """
         drop duplicate rows
         """
-        non_duplicates=self.df.drop_duplicate(subset="original_text")
+        non_duplicates=self.df.drop_duplicate(subset="original_text", inplace=True)
         df=non_duplicates
 
         return df
@@ -62,8 +62,7 @@ class Clean_Tweets:
         df = df.drop(self.df[self.df['lang']!= 'en'].index)
         
         return df
-
-
+    def preprocessing_tweet(self, df:pd.DataFrame)->pd.
 
 
 #add main function of class
