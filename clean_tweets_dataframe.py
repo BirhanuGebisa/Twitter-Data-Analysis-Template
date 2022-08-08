@@ -1,6 +1,7 @@
 import string
 import pandas as pd
 import numpy as np
+from nltk.corpus import stopwords
 
 class Clean_Tweets:
     """
@@ -69,12 +70,27 @@ class Clean_Tweets:
         #change to lower case
         self.df["full_text"] = self.df["full_text"].str.lower()
 
-        #Remove URL from full text
+        #remove URL from full text
         self.df["full_text"] = self.df["full_text"].str.replace("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", " ")
         
-         #Remove Emojis
+        #remove Emojis
         self.df["full_text"] = self.df["full_text"].astype(str).apply(lambda x: x.encode('latin-1', 'ignore').decode('latin-1'))
 
+        #remove symbols text 
+        self.df["full_text"] = self.df["full_text"].str.replace('(\@w+.*?', " ")
+
+        #remove punctatuation
+        self.df["full_text"] = self.df["full_text"].apply(lambda x: " ".join([i for i in x if i not in string.punctuation]))
+
+        #remove stop words from full text
+        stopword_list = stopwords.words('english')
+        self.df["full_text"] = self.df["full_text"].apply(lambda x: " ".join([w for w in x.split() if w not in (stopword_list)]))
+ 
+        #drop empty tweets preprocessing
+        self.df.drop(self.df[self.df["full_text"]== " "].index, inplace= True)
+
+        return self.df
+        
 #add main function of class
 if __name__ == " __main__":
     cleaned_df=pd.read_csv("data/processed_tweet_data.csv")
