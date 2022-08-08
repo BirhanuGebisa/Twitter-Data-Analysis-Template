@@ -1,6 +1,7 @@
 import string
 import pandas as pd
 import numpy as np
+
 class Clean_Tweets:
     """
     The PEP8 Standard AMAZING!!!
@@ -45,12 +46,13 @@ class Clean_Tweets:
         favorite_count etc to numbers
         """
         df['polarity'] = pd.to_numeric(self.df["polarity"], errors="coerce")
-        df['polarity'] = pd.to_numeric(self.df["polarity"], errors="coerce")  
+        df['subjectivity'] = pd.to_numeric(self.df["subjectivity"], errors="coerce")   
+        df['friends_count'] = pd.to_numeric(self.df["friends_count"], errors="coerce")
+        df['retweet_count'] = pd.to_numeric(self.df["retweet_count"], errors="coerce")
+        df['favorite_count'] = pd.to_numeric(self.df["favorite_count"], errors="coerce")
+        df['followers_count'] = pd.to_numeric(self.df["followers_count"], errors="coerce")
 
-
-
-
-        return df
+        return self.df
     
     def remove_non_english_tweets(self, df:pd.DataFrame)->pd.DataFrame:
         """
