@@ -43,9 +43,9 @@ class TweetDfExtractor:
         text = []
         for x in self.tweets_list:
             try:
-                text.append(x['retweeted_status']["extended_tweet"]['full_text'])
+                text.append(x['retweeted_status']['extended_tweet']['full_text'])
             except KeyError:
-                text.append(x["text"])
+                text.append(x['text'])
         
         return text
     #find sentiments of text using TextBlob
@@ -96,15 +96,28 @@ class TweetDfExtractor:
     #retweet count
     def find_retweet_count(self)->list:
         retweet_count = []
-        
+        for tweet in self.tweets_list:
+            if 'retweeted_status' in self.tweets_list:
+                retweet_count.append(tweet["retweeted_count"])
+            else:
+                retweet_count.append(None)
 
+        return retweet_count     
+    #hashtags count
     def find_hashtags(self)->list:
-        hashtags =
+        hashtags = []
+        for tweethash in self.tweets_list:
+            hashtags.append(", ".join([hashtag_item['text'] for hashtag_item in tweethash["entities"]["hashtags"]]))
 
+        return hashtags
+    #mention on tweets   
     def find_mentions(self)->list:
-        mentions = 
-
-
+        mentions = []
+        for tweethash in self.tweets_list:
+            mentions.append(", ".join([mention["sreen_name"] for mention in tweethash["entities"]["user_mentions"]]))
+        
+        return mentions
+    #location of tweet  
     def find_location(self)->list:
         try:
             location = self.tweets_list['user']['location']
@@ -113,9 +126,7 @@ class TweetDfExtractor:
         
         return location
 
-    
-        
-        
+          
     def get_tweet_df(self, save=False)->pd.DataFrame:
         """required column to be generated you should be creative and add more features"""
         
@@ -140,12 +151,12 @@ class TweetDfExtractor:
         df = pd.DataFrame(data=data, columns=columns)
 
         if save:
-            df.to_csv('processed_tweet_data.csv', index=False)
+            df.to_csv('data/processed_tweet_data.csv', index=False)
             print('File Successfully Saved.!!!')
         
         return df
 
-                
+#main code      
 if __name__ == "__main__":
     # required column to be generated you should be creative and add more features
     columns = ['created_at', 'source', 'original_text','clean_text', 'sentiment','polarity','subjectivity', 'lang', 'favorite_count', 'retweet_count', 
