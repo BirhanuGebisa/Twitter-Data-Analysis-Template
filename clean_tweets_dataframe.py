@@ -62,3 +62,25 @@ class Clean_Tweets:
         df = df.drop(self.df[self.df['lang']!= 'en'].index)
         
         return df
+
+
+
+
+#add main function of class
+if __name__ == " __main__":
+    cleaned_df=pd.read_csv("data/processed_tweet_data.csv")
+    Clean_Tweets = Clean_Tweets(cleaned_df)
+    cleaned_df = Clean_Tweets.drop_duplicate(cleaned_df)
+    cleaned_df = Clean_Tweets.remove_non_english_tweets(cleaned_df)
+    cleaned_df = Clean_Tweets.convert_to_datetime(cleaned_df)
+    cleaned_df = Clean_Tweets.drop_unwanted_column(cleaned_df)
+    cleaned_df = Clean_Tweets.convert_to_numbers(cleaned_df)
+
+
+
+    #print the first five row from cleaned tweet
+    print(cleaned_df["polarity"][0:10])
+
+
+    cleaned_df.to_csv("clean_processed_tweet.csv")
+    print("Great File is successfully save!") 
