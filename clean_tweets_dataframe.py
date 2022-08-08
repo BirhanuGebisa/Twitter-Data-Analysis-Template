@@ -1,3 +1,6 @@
+import string
+import pandas as pd
+import numpy as np
 class Clean_Tweets:
     """
     The PEP8 Standard AMAZING!!!
@@ -42,7 +45,7 @@ class Clean_Tweets:
         favorite_count etc to numbers
         """
         df['polarity'] = pd.to_numeric(self.df["polarity"], errors="coerce")
-      
+        df['polarity'] = pd.to_numeric(self.df["polarity"], errors="coerce")  
 
 
 
@@ -54,6 +57,6 @@ class Clean_Tweets:
         remove non english tweets from lang
         """
         
-        df = ----
-        
+        df = 
+
         return df
