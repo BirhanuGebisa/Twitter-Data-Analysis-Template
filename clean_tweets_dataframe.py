@@ -53,12 +53,12 @@ class Clean_Tweets:
         df['followers_count'] = pd.to_numeric(self.df["followers_count"], errors="coerce")
 
         return self.df
-    
+    #clean non english language
     def remove_non_english_tweets(self, df:pd.DataFrame)->pd.DataFrame:
         """
         remove non english tweets from lang
         """
         
-        df = 
-
+        df = df.drop(self.df[self.df['lang']!= 'en'].index)
+        
         return df
