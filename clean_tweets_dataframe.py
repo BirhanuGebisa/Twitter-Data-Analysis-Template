@@ -24,7 +24,7 @@ class Clean_Tweets:
         """
         drop duplicate rows
         """
-        non_duplicates=self.df.drop_duplicate(subset="original_text", inplace=True)
+        non_duplicates=self.df.drop_duplicate(subset="full_text", inplace=True)
         df=non_duplicates
 
         return df
@@ -62,8 +62,18 @@ class Clean_Tweets:
         df = df.drop(self.df[self.df['lang']!= 'en'].index)
         
         return df
-    def preprocessing_tweet(self, df:pd.DataFrame)->pd.
+    def preprocessing_tweet(self, df:pd.DataFrame)->pd.DataFrame:
+        """
+        Preprocess the tweet full text 
+        """
+        #change to lower case
+        self.df["full_text"] = self.df["full_text"].str.lower()
 
+        #Remove URL from full text
+        self.df["full_text"] = self.df["full_text"].str.replace("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", " ")
+        
+         #Remove Emojis
+        self.df["full_text"] = self.df["full_text"].astype(str).apply(lambda x: x.encode('latin-1', 'ignore').decode('latin-1'))
 
 #add main function of class
 if __name__ == " __main__":
