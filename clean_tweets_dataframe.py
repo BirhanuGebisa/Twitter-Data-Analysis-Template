@@ -3,7 +3,7 @@ import string
 import pandas as pd
 import numpy as np
 from nltk.corpus import stopwords
-
+#python library
 class Clean_Tweets:
     """
     The PEP8 Standard AMAZING!!!
@@ -66,7 +66,6 @@ class Clean_Tweets:
         self.df.reset_index(drop=True, inplace=True)
         
         return self.df
-   
     def preprocessing_tweet(self, df:pd.DataFrame)->pd.DataFrame:
         """
         Preprocess the tweet full text 
@@ -90,7 +89,7 @@ class Clean_Tweets:
         stopword_list = stopwords.words('english')
         self.df["full_text"] = self.df["full_text"].apply(lambda x: " ".join([w for w in x.split() if w not in (stopword_list)]))
  
-        #drop empty tweets preprocessing
+        #drop empty tweets preprocess
         self.df.drop(self.df[self.df["full_text"]== " "].index, inplace= True)
 
         return self.df
@@ -104,6 +103,7 @@ class Clean_Tweets:
         self.df['lang'] = self.df['lang'].fillna(" ")
         self.df['full_text'] = self.df['full_text'].fillna(" ")
         self.df['source'] = self.df['source'].fillna(" ")
+
         return self.df
 #add main function of class
 if __name__ == "__main__":
