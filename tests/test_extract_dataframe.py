@@ -54,8 +54,8 @@ class TestTweetDfExtractor(unittest.TestCase):
         #self.assertEqual(self.df.find_statuses_count(), [ ]) #<provide a list of the first five status counts>
         
     def test_find_full_text(self):
-        text = ["RRT @i_ameztoy: Extra random image (I):Lets focus in one very specific zone of the western coast -&gt; Longjing District, Taichung #City, #Ta…",
-                "RT @IndoPac_Info: #Chinas' media explains the military reasons for each area of the drills in the #Taiwan Strait Read the labels in the pi…",
+        text = ["RT @i_ameztoy: Extra random image (I):\n\nLets focus in one very specific zone of the western coast -&gt; Longjing District, Taichung #City, #Ta…",
+                "RT @IndoPac_Info: #China's media explains the military reasons for each area of the drills in the #Taiwan Strait\n\nRead the labels in the pi…",
                 "China even cut off communication, they don't anwer phonecalls from the US. But here clown @ZelenskyyUa enters the stage to ask #XiJinping to change Putin's mind.",
                 "Putin to #XiJinping : I told you my friend, Taiwan will be a vassal state, including nukes, much like the Ukrainian model. I warned you... But it took Pelosi to open China's eyes.",
                 "RT @ChinaUncensored: I’m sorry, I thought Taiwan was an independent country because it had its own government, currency, military, travel d…"
@@ -67,23 +67,23 @@ class TestTweetDfExtractor(unittest.TestCase):
             ([-0.125,-0.1,0.0,0.1,-6.938893903907228e-18],[0.190625,0.1,0.0,0.35,0.55625]))
 
     def test_find_screen_name(self):
-        name = ['i_ameztoy', 'IndoPac_Info', 'ZelenskyyUa', ' ', 'ChinaUncensored']
-        self.assertEqual(self.df.find_screen_name(), name)
+        name = ['i_ameztoy', 'IndoPac_Info', 'ZelenskyyUa', '', 'ChinaUncensored']
+        self.assertEqual(self.df.find_mentions(), name)
 
     def test_find_retweet_count(self):
         retweet_count =[2, 201,0,0,381]
-        self.assertEqual(self.df.find_friends_count(), retweet_count)
+        self.assertEqual(self.df.find_retweet_count(), retweet_count)
 
     def test_find_is_sensitive(self):
-        self.assertEqual(self.df.is_sensitive(), True, False," ", " ", " ")
+        self.assertEqual(self.df.is_sensitive(), [None,None,None,None,None])
 
 
     def test_find_hashtags(self):
-        self.assertEqual(self.df.find_hashtags(), ['City','China, Taiwan','XiJinping','XiJinping'])
+        self.assertEqual(self.df.find_hashtags(), ['City','China, Taiwan','XiJinping','XiJinping', ""])
 
     def test_find_location(self):
-        self.assertEqual(self.df.find_locationfin(), [' ',' ','Netherlands'], 'Netherlands', 'Ayent, Schweiz')
-
+        self.assertEqual(self.df.find_location(), ['','','Netherlands', 'Netherlands', 'Ayent, Schweiz'])
 if __name__ == "__main__":
     unittest.main()
+    
 
