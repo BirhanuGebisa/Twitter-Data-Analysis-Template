@@ -61,9 +61,11 @@ class Clean_Tweets:
         remove non english tweets from lang
         """
         
-        df = df.drop(self.df[self.df['lang']!= 'en'].index)
+        index_name= self.df[self.df['lang']!= 'en'].index
+        self.df.drop(index_name, inplace=True)
+        self.df.reset_index(drop=True, inplace=True)
         
-        return df
+        return self.df
    
     def preprocessing_tweet(self, df:pd.DataFrame)->pd.DataFrame:
         """
@@ -92,7 +94,17 @@ class Clean_Tweets:
         self.df.drop(self.df[self.df["full_text"]== " "].index, inplace= True)
 
         return self.df
-
+    def fill_nullvalues(self):
+        self.df['possibly_sensitive'] = self.df['possibly_sensitive'].fillna(
+            False)
+        self.df['created_at'] = self.df['created_at'].fillna(" ")
+        self.df['place'] = self.df['location'].fillna(" ")
+        self.df['retweet_count'] = self.df['retweet_count'].fillna(0)
+        self.df['favorite_count'] = self.df['favorite_count'].fillna(0)
+        self.df['lang'] = self.df['lang'].fillna(" ")
+        self.df['full_text'] = self.df['full_text'].fillna(" ")
+        self.df['source'] = self.df['source'].fillna(" ")
+        return self.df
 #add main function of class
 if __name__ == "__main__":
     cleaned_df=pd.read_csv("data/processed_tweet_data.csv")
