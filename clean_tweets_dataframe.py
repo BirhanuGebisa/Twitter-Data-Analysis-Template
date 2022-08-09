@@ -1,3 +1,4 @@
+from operator import index
 import string
 import pandas as pd
 import numpy as np
@@ -21,6 +22,7 @@ class Clean_Tweets:
         df = df[df['polarity'] != 'polarity']
         
         return df
+    
     def drop_duplicate(self, df:pd.DataFrame)->pd.DataFrame:
         """
         drop duplicate rows
@@ -29,6 +31,7 @@ class Clean_Tweets:
         df=non_duplicates
 
         return df
+ 
     def convert_to_datetime(self, df:pd.DataFrame)->pd.DataFrame:
         """
         convert column to datetime
@@ -54,7 +57,7 @@ class Clean_Tweets:
         df['followers_count'] = pd.to_numeric(self.df["followers_count"], errors="coerce")
 
         return self.df
-    #clean non english language
+   
     def remove_non_english_tweets(self, df:pd.DataFrame)->pd.DataFrame:
         """
         remove non english tweets from lang
@@ -63,6 +66,7 @@ class Clean_Tweets:
         df = df.drop(self.df[self.df['lang']!= 'en'].index)
         
         return df
+   
     def preprocessing_tweet(self, df:pd.DataFrame)->pd.DataFrame:
         """
         Preprocess the tweet full text 
@@ -90,7 +94,7 @@ class Clean_Tweets:
         self.df.drop(self.df[self.df["full_text"]== " "].index, inplace= True)
 
         return self.df
-        
+
 #add main function of class
 if __name__ == " __main__":
     cleaned_df=pd.read_csv("data/processed_tweet_data.csv")
@@ -100,12 +104,11 @@ if __name__ == " __main__":
     cleaned_df = Clean_Tweets.convert_to_datetime(cleaned_df)
     cleaned_df = Clean_Tweets.drop_unwanted_column(cleaned_df)
     cleaned_df = Clean_Tweets.convert_to_numbers(cleaned_df)
-
-
+    print(cleaned_df.head())
 
     #print the first five row from cleaned tweet
-    print(cleaned_df["polarity"][0:10])
+    print(cleaned_df["polarity"].head())
 
 
-    cleaned_df.to_csv("clean_processed_tweet.csv")
+    cleaned_df.to_csv("data/clean_processed_tweet.csv")
     print("Great File is successfully save!") 
