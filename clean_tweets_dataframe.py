@@ -27,10 +27,10 @@ class Clean_Tweets:
         """
         drop duplicate rows
         """
-        non_duplicates=self.df.drop_duplicate(subset="full_text", inplace=True)
-        df=non_duplicates
+        self.df.drop_duplicates(inplace=True)
+        self.df.reset_index(drop=True, inplace=True)
 
-        return df
+        return self.df
  
     def convert_to_datetime(self, df:pd.DataFrame)->pd.DataFrame:
         """
@@ -51,10 +51,10 @@ class Clean_Tweets:
         """
         df['polarity'] = pd.to_numeric(self.df["polarity"], errors="coerce")
         df['subjectivity'] = pd.to_numeric(self.df["subjectivity"], errors="coerce")   
-        df['friends_count'] = pd.to_numeric(self.df["friends_count"], errors="coerce")
+       # df['friends_count'] = pd.to_numeric(self.df["friends_count"], errors="coerce")
         df['retweet_count'] = pd.to_numeric(self.df["retweet_count"], errors="coerce")
         df['favorite_count'] = pd.to_numeric(self.df["favorite_count"], errors="coerce")
-        df['followers_count'] = pd.to_numeric(self.df["followers_count"], errors="coerce")
+      #  df['followers_count'] = pd.to_numeric(self.df["followers_count"], errors="coerce")
 
         return self.df
    
@@ -96,7 +96,7 @@ class Clean_Tweets:
         return self.df
 
 #add main function of class
-if __name__ == " __main__":
+if __name__ == "__main__":
     cleaned_df=pd.read_csv("data/processed_tweet_data.csv")
     Clean_Tweets = Clean_Tweets(cleaned_df)
     cleaned_df = Clean_Tweets.drop_duplicate(cleaned_df)
@@ -104,7 +104,6 @@ if __name__ == " __main__":
     cleaned_df = Clean_Tweets.convert_to_datetime(cleaned_df)
     cleaned_df = Clean_Tweets.drop_unwanted_column(cleaned_df)
     cleaned_df = Clean_Tweets.convert_to_numbers(cleaned_df)
-    print(cleaned_df.head())
 
     #print the first five row from cleaned tweet
     print(cleaned_df["polarity"].head())
