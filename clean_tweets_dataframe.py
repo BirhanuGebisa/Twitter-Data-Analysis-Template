@@ -36,7 +36,8 @@ class Clean_Tweets:
         """
         convert column to datetime
         """
-        self.df['created_at'] = pd.to_datetime(self.df["created_at"], errors="coerce")
+        self.df['created_at'] = pd.to_datetime(
+            self.df["created_at"], errors="coerce")
         
         return self.df
 
@@ -49,12 +50,9 @@ class Clean_Tweets:
         convert columns like polarity, subjectivity, retweet_count
         favorite_count etc to numbers
         """
-        df['polarity'] = pd.to_numeric(self.df["polarity"], errors="coerce")
-        df['subjectivity'] = pd.to_numeric(self.df["subjectivity"], errors="coerce")   
-       # df['friends_count'] = pd.to_numeric(self.df["friends_count"], errors="coerce")
-        df['retweet_count'] = pd.to_numeric(self.df["retweet_count"], errors="coerce")
-        df['favorite_count'] = pd.to_numeric(self.df["favorite_count"], errors="coerce")
-      #  df['followers_count'] = pd.to_numeric(self.df["followers_count"], errors="coerce")
+        self.df[['polarity','subjectivity', 'retweet_count','favorite_count']]= self.df[['polarity','subjectivity',
+        'retweet_count','favorite_count']].apply(pd.to_numeric, errors='coerce')
+      
 
         return self.df
    
@@ -104,7 +102,6 @@ if __name__ == "__main__":
     cleaned_df = Clean_Tweets.convert_to_datetime(cleaned_df)
     cleaned_df = Clean_Tweets.drop_unwanted_column(cleaned_df)
     cleaned_df = Clean_Tweets.convert_to_numbers(cleaned_df)
-
     #print the first five row from cleaned tweet
     print(cleaned_df["polarity"].head())
 
