@@ -1,3 +1,4 @@
+#python library
 import json
 import pandas as pd
 from textblob import TextBlob
@@ -11,7 +12,6 @@ def read_json(json_file: str)->list:
     
     
     return len(tweets_data), tweets_data
-
 class TweetDfExtractor:
     """
     this function will parse tweets json into a pandas dataframe
@@ -106,7 +106,7 @@ class TweetDfExtractor:
         return location
     def get_tweet_df(self, save=False)->pd.DataFrame:
         """required column to be generated you should be creative and add more features"""
-        
+        #columns for global datasets
         columns = ['created_at', 'source', 'full_text','polarity','subjectivity', 'lang', 'favorite_count', 'retweet_count','possibly_sensitive','hashtags', 'user_mentions', 'place']
         
         created_at = self.find_created_time()
@@ -129,7 +129,7 @@ class TweetDfExtractor:
         
         return df
 
-#main code      
+#main code 
 if __name__ == "__main__":
     # required column to be generated you should be creative and add more features
     columns = ['created_at', 'source', 'full_text','polarity','subjectivity','lang','favorite_count','retweet_count','possibly_sensitive','hashtags', 'user_mentions', 'place']
