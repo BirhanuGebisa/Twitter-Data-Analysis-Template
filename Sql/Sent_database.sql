@@ -1,4 +1,8 @@
 -- Active: 1660309191091@@127.0.0.1@3306@tweets
+--""
+--Create table if not exists
+--contain table columns of twitter dataset
+--""
 CREATE TABLE IF NOT EXISTS Sentiment_Analysis_Table
 (id INT NOT NULL AUTO_INCREMENT,
     created_at TEXT NOT NULL,
