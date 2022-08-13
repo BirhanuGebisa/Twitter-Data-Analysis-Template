@@ -47,3 +47,11 @@ Have Fun and Cheers
   * snapshot for the dashboard
 
 **Instructions**
+
+# Install
+
+```shell
+git clone https://github.com/BirhanuGebisa/Twitter-Data-Analysis-Template.git
+cd Twitter-Data-Analysis-Template
+pip install -r requirements.txt
+```
