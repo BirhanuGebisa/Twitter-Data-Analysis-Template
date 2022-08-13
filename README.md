@@ -26,3 +26,24 @@ After Completing this Challenge, you would have explore
 - Bug Fix (Debugging)
 
 Have Fun and Cheers
+
+**Contents**
+
+* Data
+  * Twitter data
+* Bugfix
+  * fixed code
+* Model
+  * Trained Sentiment model
+* Tests
+  * Unit Testing
+* Notebook
+  * Topic modeling, EDA and modeling
+* Sql
+  * Database scripts
+* Dahsboard
+  * Streamlit dashboard for sentiment analysis
+* Dashboard screenshot
+  * snapshot for the dashboard
+
+**Instructions**
