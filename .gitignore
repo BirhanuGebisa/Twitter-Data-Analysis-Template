@@ -1,4 +1,3 @@
 __pycache__/
 /example.ipynb
-/.ipynb_checkpoints
-/__init__.py
+/data
