@@ -1,10 +1,11 @@
-name: multivarPrphoetVar2
+name: sentiment
 channels:
   - conda-forge
 dependencies:
   - streamlit==1.8.1
-  - pystan==2.19.1.1
-  - fbprophet==0.7.1
+  - wordcloud==1.8.1
+  - altair==3.2.0
+  - textblob>=0.15.3
   - pip
   - pip:
     - plotly==4.14.3
