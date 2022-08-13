@@ -7,7 +7,7 @@ from zipfile import ZipFile
 #read the json file 
 def read_json(json_file: str)->list:
     tweets_data = []
-    for tweets in open("../data/global_twitter_data.json",'r'):
+    for tweets in open("data/global_twitter_data.json",'r'):
         tweets_data.append(json.loads(tweets))
     
     
