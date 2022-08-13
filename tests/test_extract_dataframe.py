@@ -13,7 +13,7 @@ from extract_dataframe import TweetDfExtractor
 # Provide the path to the samples tweets file you created below
 sampletweetsjsonfile = "data/processed_tweet_data.csv"   #put here the path to where you placed the file e.g. ./sampletweets.json. 
 _, tweet_list = read_json(sampletweetsjsonfile)
-
+#columns of datasets
 columns = [
     "created_at",
     "source",
@@ -35,7 +35,6 @@ columns = [
     "place",
     "place_coord_boundaries",
 ]
-
 
 class TestTweetDfExtractor(unittest.TestCase):
     """
@@ -83,6 +82,7 @@ class TestTweetDfExtractor(unittest.TestCase):
 
     def test_find_location(self):
         self.assertEqual(self.df.find_location(), ['','','Netherlands', 'Netherlands', 'Ayent, Schweiz'])
+#main class init
 if __name__ == "__main__":
     unittest.main()
     
