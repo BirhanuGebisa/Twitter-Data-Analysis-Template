@@ -47,17 +47,17 @@ def barChart(data, title, X, Y):
                 order='ascending')), y=f"{Y}:Q"))
     st.altair_chart(msgChart, use_container_width=True)
 
-def wordCloud():
-    df = loadData()
-    cleanText = ''
-    for text in df['full_text']:
-        tokens = str(text).lower().split()
+#def wordCloud():
+#    df = loadData()
+#    cleanText = ''
+#    for text in df['full_text']:
+#        tokens = str(text).lower().split()
 
-        cleanText += " ".join(tokens) + " "
+ #       cleanText += " ".join(tokens) + " "
 
-    wc = WordCloud(width=650, height=450, background_color='white', min_font_size=5).generate(cleanText)
-    st.title("Tweet Text Word Cloud")
-    st.image(wc.to_array())
+#    wc = WordCloud(width=650, height=450, background_color='white', min_font_size=5).generate(cleanText)
+#    st.title("Tweet Text Word Cloud")
+#    st.image(wc.to_array())
 
 def stBarChart():
     df = loadData()
@@ -93,7 +93,7 @@ selectHashTag()
 st.markdown("<p style='padding:10px; background-color:#000000;color:#00ECB9;font-size:16px;border-radius:10px;'>Section Break</p>", unsafe_allow_html=True)
 selectLocAndAuth()
 st.title("Data Visualizations")
-wordCloud()
+#wordCloud()
 with st.beta_expander("Show More Graphs"):
     stBarChart()
     langPie()
