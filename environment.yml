@@ -1,6 +1,1 @@
-name: sentiment
-channels:
-  - conda-forge
-dependencies:
-  - wordcloud==1.8.1
-  - altair==3.2.0
+
