@@ -2,10 +2,6 @@ name: sentiment
 channels:
   - conda-forge
 dependencies:
-  - streamlit==1.8.1
   - wordcloud==1.8.1
   - altair==3.2.0
   - textblob>=0.15.3
-  - pip
-  - pip:
-    - plotly==4.14.3
